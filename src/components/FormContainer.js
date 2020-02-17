@@ -1,11 +1,9 @@
 import React from 'react';
 import TextFormField from './TextFormField';
 import SelectFormField from './SelectFormField';
-import { getTodaysDate } from '../helpers';
 
-function TodoForm() {
-
-    const options = [
+function FormContainer(props) {
+    const priorities = [
         { id: 'high', name: 'High' },
         { id: 'medium', name: 'Medium' },
         { id: 'low', name: 'Low' }
@@ -15,29 +13,40 @@ function TodoForm() {
         <div className="column">
             <h2 className="is-size-3 has-text-centered">Add Task</h2>
 
-            <form>
+            <form onSubmit={props.handleSubmit}>
                 <TextFormField
-                    label="Date"
+                    handleChange={props.handleChange}
                     inputType="date"
-                    value={getTodaysDate()}
+                    name="date"
+                    label="Date"
+                    value={props.date}
                 />
 
                 <TextFormField
-                    label="Task name"
+                    handleChange={props.handleChange}
                     inputType="text"
+                    name="name"
+                    label="Task name"
+                    value={props.name}
                     required={true}
                 />
 
                 <SelectFormField
+                    handleChange={props.handleChange}
+                    name="priority"
                     label="Select task priority"
-                    options={options}
-                    value="low"
+                    options={priorities}
+                    value={props.priority}
                 />
 
-                <input className="button is-link" type="submit" value="Submit" />
+                <input
+                    className="button is-link"
+                    type="submit"
+                    value="Submit"
+                />
             </form>
         </div>
     );
 }
 
-export default TodoForm;
+export default FormContainer;

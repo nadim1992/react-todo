@@ -5,7 +5,13 @@ function TextFormField(props) {
         <div className="field">
             <label className="label">{props.label}</label>
             <div className="control">
-                <input className="input" type={props.inputType} value={props.value} required={props.required} />
+                <input className="input"
+                    onChange={props.handleChange}
+                    name={props.name}
+                    type={props.inputType}
+                    value={props.value}
+                    required={props.required}
+                />
             </div>
         </div>
     );
