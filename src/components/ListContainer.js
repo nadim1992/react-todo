@@ -11,11 +11,11 @@ function DateTag(props) {
 function PriorityTag(props) {
     let classes = 'tag is-pulled-right';
 
-    switch ( props.priority ) {
+    switch (props.priority) {
         case 'low':
             classes += ' has-background-success has-text-white ';
             break;
-        
+
         case 'medium':
             classes += ' has-background-warning has-text-dark ';
             break;
@@ -42,7 +42,12 @@ function ListContainer(props) {
             <ul className="list">
                 {props.todos.map(todo =>
                     <li className="list-item" key={todo.id}>
-                        {todo.name} <DateTag date={todo.date} />
+                        <label class="checkbox">
+                            <input
+                                checked={todo.complete}
+                                type="checkbox"
+                            /> {todo.name} <DateTag date={todo.date} />
+                        </label>
                         <PriorityTag priority={todo.priority} />
                     </li>
                 )}

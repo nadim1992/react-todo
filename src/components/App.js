@@ -9,26 +9,24 @@ import 'bulma/css/bulma.css';
 import './App.css';
 
 function App() {
-    const [todos, setTodos] = useState([{
-        id:0,name:'',date:'',priority:'low'
-    }]);
+    const [todos, setTodos] = useState([]);
     const [date, setDate] = useState(getTodaysDate());
     const [name, setName] = useState('');
     const [priority, setPriority] = useState('low');
 
     const handleChange = (e) => {
-        switch ( e.target.name ) {
+        switch (e.target.name) {
             case 'date':
                 setDate(e.target.value);
-            break;
+                break;
 
             case 'name':
                 setName(e.target.value);
-            break;
+                break;
 
-            case 'priority':                
+            case 'priority':
                 setPriority(e.target.value);
-            break;
+                break;
 
             default:
         }
@@ -38,7 +36,7 @@ function App() {
         let count = todos.length;
 
         setTodos([
-            { id: ++count, date, name, priority },
+            { id: ++count, complete: false, date, name, priority },
             ...todos
         ]);
 
@@ -56,14 +54,14 @@ function App() {
     // Initialize test data
     useEffect(() => {
         setTodos([
-            { id: 1, date: '2018-11-02', name: 'Go to store', priority: 'low' },
-            { id: 2, date: '2018-11-04', name: 'Buy some food', priority: 'high' },
-            { id: 3, date: '2018-11-05', name: 'Go to school', priority: 'low' },
-            { id: 4, date: '2018-11-07', name: 'Call Mr. John', priority: 'low' },
-            { id: 5, date: '2018-11-12', name: 'Go something fun', priority: 'medium' },
-            { id: 6, date: '2018-11-23', name: 'Come back home', priority: 'low' },
-            { id: 7, date: '2019-11-23', name: 'Watch movie', priority: 'medium' },
-            { id: 8, date: '2018-11-27', name: 'Go to bed', priority: 'low' }
+            { id: 1, complete: false, date: '2018-11-02', name: 'Go to store', priority: 'low' },
+            { id: 2, complete: false, date: '2018-11-04', name: 'Buy some food', priority: 'high' },
+            { id: 3, complete: false, date: '2018-11-05', name: 'Go to school', priority: 'low' },
+            { id: 4, complete: true, date: '2018-11-07', name: 'Call Mr. John', priority: 'low' },
+            { id: 5, complete: false, date: '2018-11-12', name: 'Go something fun', priority: 'medium' },
+            { id: 6, complete: true, date: '2018-11-23', name: 'Come back home', priority: 'low' },
+            { id: 7, complete: true, date: '2019-11-23', name: 'Watch movie', priority: 'medium' },
+            { id: 8, complete: false, date: '2018-11-27', name: 'Go to bed', priority: 'low' }
         ]);
     }, []);
 
