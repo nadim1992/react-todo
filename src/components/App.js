@@ -27,10 +27,6 @@ function App() {
             case 'priority':
                 setPriority(e.target.value);
                 break;
-        
-            // case 'search':
-            //     filterTodos(e.target.value);
-            //     break;
 
             default:
         }
@@ -49,18 +45,25 @@ function App() {
         e.preventDefault();
     };
 
+    const handleComplete = (e) => {
+        const id = parseInt(e.target.dataset.id);
+
+        setTodos(
+            todos.map(todo => {
+                if (todo.id === id) {
+                    todo.complete = !todo.complete;
+                }
+
+                return todo;
+            })
+        );
+    };
+
     const resetForm = () => {
         setDate(getTodaysDate());
         setName('');
         setPriority('low');
     };
-
-    // const filterTodos = (term) => {
-    //     const search = new RegExp(term, 'i');
-    //     const filteredTasks = todos.filter( todo => todo.name.match(search) ? todo : null );
-
-    //     setTodos(filteredTasks);
-    // };
 
     // Initialize test data
     useEffect(() => {
@@ -87,7 +90,10 @@ function App() {
                     priority={priority}
                 />
 
-                <ListContainer todos={todos} />
+                <ListContainer
+                    handleComplete={handleComplete}
+                    todos={todos}
+                />
             </div>
         </div>
     );

@@ -6,8 +6,10 @@ import DateTag from './DateTag';
 function ListItem(props) {
     return (
         <li className="list-item">
-            <label class="checkbox">
+            <label className="checkbox">
                 <input
+                    onChange={props.handleComplete}
+                    data-id={props.todo.id}
                     checked={props.todo.complete}
                     type="checkbox"
                 /> {props.todo.name} <DateTag date={props.todo.date} />
@@ -37,7 +39,11 @@ function ListContainer(props) {
             <ul className="list">
                 {props.todos.map(todo =>
                     todo.name.includes(search) &&
-                        <ListItem key={todo.id} todo={todo} />
+                    <ListItem
+                        handleComplete={props.handleComplete}
+                        key={todo.id}
+                        todo={todo}
+                    />
                 )}
             </ul>
         </div>
