@@ -27,6 +27,10 @@ function App() {
             case 'priority':
                 setPriority(e.target.value);
                 break;
+        
+            // case 'search':
+            //     filterTodos(e.target.value);
+            //     break;
 
             default:
         }
@@ -50,6 +54,13 @@ function App() {
         setName('');
         setPriority('low');
     };
+
+    // const filterTodos = (term) => {
+    //     const search = new RegExp(term, 'i');
+    //     const filteredTasks = todos.filter( todo => todo.name.match(search) ? todo : null );
+
+    //     setTodos(filteredTasks);
+    // };
 
     // Initialize test data
     useEffect(() => {
@@ -76,10 +87,7 @@ function App() {
                     priority={priority}
                 />
 
-                <ListContainer
-                    todos={todos}
-                    handleChange={handleChange}
-                />
+                <ListContainer todos={todos} />
             </div>
         </div>
     );

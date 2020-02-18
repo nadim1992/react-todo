@@ -1,55 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ListFilter from './ListFilter';
+import PriorityTag from './PriorityTag';
+import DateTag from './DateTag';
 
-function DateTag(props) {
+function ListItem(props) {
     return (
-        <span className="tag">
-            {props.date}
-        </span>
-    );
-}
+        <li className="list-item">
+            <label class="checkbox">
+                <input
+                    checked={props.todo.complete}
+                    type="checkbox"
+                /> {props.todo.name} <DateTag date={props.todo.date} />
+            </label>
 
-function PriorityTag(props) {
-    let classes = 'tag is-pulled-right';
-
-    switch (props.priority) {
-        case 'low':
-            classes += ' has-background-success has-text-white ';
-            break;
-
-        case 'medium':
-            classes += ' has-background-warning has-text-dark ';
-            break;
-
-        case 'high':
-            classes += ' has-background-danger has-text-white ';
-            break;
-
-        default:
-    }
-
-    return (
-        <span className={classes}>
-            {props.priority}
-        </span>
+            <PriorityTag priority={props.todo.priority} />
+        </li>
     );
 }
 
 function ListContainer(props) {
+    const [search, setSearch] = useState('');
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value);
+    };
+
     return (
         <div className="column">
             <h2 className="is-size-3 has-text-centered">Tasks</h2>
 
+            <ListFilter
+                handleSearch={handleSearch}
+                search={search}
+            />
+
             <ul className="list">
                 {props.todos.map(todo =>
-                    <li className="list-item" key={todo.id}>
-                        <label class="checkbox">
-                            <input
-                                checked={todo.complete}
-                                type="checkbox"
-                            /> {todo.name} <DateTag date={todo.date} />
-                        </label>
-                        <PriorityTag priority={todo.priority} />
-                    </li>
+                    todo.name.includes(search) &&
+                        <ListItem key={todo.id} todo={todo} />
                 )}
             </ul>
         </div>
