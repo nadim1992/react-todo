@@ -7,7 +7,7 @@ select,
     width: 100%;
 }
 
-span[role=button],
+span[role=img],
 th {
     cursor: pointer;
 }

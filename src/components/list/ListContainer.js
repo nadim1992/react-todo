@@ -30,7 +30,7 @@ function ListContainer(props) {
                 </thead>
                 <tbody>
                     {props.todos.map(todo =>
-                        todo.name.includes(search) &&
+                        todo.name.toLowerCase().includes(search) &&
                         <ItemRow
                             handleComplete={props.handleComplete}
                             handleRemove={props.handleRemove}
