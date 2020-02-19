@@ -1,24 +1,6 @@
 import React, { useState } from 'react';
 import ListFilter from './ListFilter';
-import PriorityTag from './PriorityTag';
-import DateTag from './DateTag';
-
-function ListItem(props) {
-    return (
-        <li className="list-item">
-            <label className="checkbox">
-                <input
-                    onChange={props.handleComplete}
-                    data-id={props.todo.id}
-                    checked={props.todo.complete}
-                    type="checkbox"
-                /> {props.todo.name} <DateTag date={props.todo.date} />
-            </label>
-
-            <PriorityTag priority={props.todo.priority} />
-        </li>
-    );
-}
+import ListItem from './ListItem';
 
 function ListContainer(props) {
     const [search, setSearch] = useState('');
@@ -41,6 +23,7 @@ function ListContainer(props) {
                     todo.name.includes(search) &&
                     <ListItem
                         handleComplete={props.handleComplete}
+                        handleRemove={props.handleRemove}
                         key={todo.id}
                         todo={todo}
                     />

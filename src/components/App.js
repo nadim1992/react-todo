@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import FormContainer from './FormContainer';
-import ListContainer from './ListContainer';
+import FormContainer from './form/FormContainer';
+import ListContainer from './list/ListContainer';
 
 import { getTodaysDate } from '../helpers';
 
@@ -59,6 +59,12 @@ function App() {
         );
     };
 
+    const handleRemove = (e) => {
+        const id = parseInt(e.target.dataset.id);
+
+        setTodos(todos.filter(todo => todo.id !== id));
+    };
+
     const resetForm = () => {
         setDate(getTodaysDate());
         setName('');
@@ -72,7 +78,7 @@ function App() {
             { id: 2, complete: false, date: '2018-11-04', name: 'Buy some food', priority: 'high' },
             { id: 3, complete: false, date: '2018-11-05', name: 'Go to school', priority: 'low' },
             { id: 4, complete: true, date: '2018-11-07', name: 'Call Mr. John', priority: 'low' },
-            { id: 5, complete: false, date: '2018-11-12', name: 'Go something fun', priority: 'medium' },
+            { id: 5, complete: false, date: '2018-11-12', name: 'Do something fun', priority: 'medium' },
             { id: 6, complete: true, date: '2018-11-23', name: 'Come back home', priority: 'low' },
             { id: 7, complete: true, date: '2019-11-23', name: 'Watch movie', priority: 'medium' },
             { id: 8, complete: false, date: '2018-11-27', name: 'Go to bed', priority: 'low' }
@@ -92,6 +98,7 @@ function App() {
 
                 <ListContainer
                     handleComplete={handleComplete}
+                    handleRemove={handleRemove}
                     todos={todos}
                 />
             </div>

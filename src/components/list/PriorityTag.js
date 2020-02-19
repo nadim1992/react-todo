@@ -1,7 +1,7 @@
 import React from 'react';
 
 function PriorityTag(props) {
-    let classes = 'tag is-pulled-right';
+    let classes = 'tag';
 
     switch (props.priority) {
         case 'low':

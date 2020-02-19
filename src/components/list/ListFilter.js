@@ -1,5 +1,5 @@
 import React from 'react';
-import TextFormField from './TextFormField';
+import TextFormField from '../form/TextFormField';
 
 function ListFilter(props) {
     return (

@@ -6,3 +6,7 @@ select,
 .select {
     width: 100%;
 }
+
+span[role=button] {
+    cursor: pointer;
+}
