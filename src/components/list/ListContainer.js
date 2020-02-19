@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ListFilter from './ListFilter';
-import ListItem from './ListItem';
+import ItemRow from './ItemRow';
 
 function ListContainer(props) {
     const [search, setSearch] = useState('');
@@ -10,7 +10,7 @@ function ListContainer(props) {
     };
 
     return (
-        <div className="column">
+        <div className="column is-three-fifths">
             <h2 className="is-size-3 has-text-centered">Tasks</h2>
 
             <ListFilter
@@ -18,17 +18,28 @@ function ListContainer(props) {
                 search={search}
             />
 
-            <ul className="list">
-                {props.todos.map(todo =>
-                    todo.name.includes(search) &&
-                    <ListItem
-                        handleComplete={props.handleComplete}
-                        handleRemove={props.handleRemove}
-                        key={todo.id}
-                        todo={todo}
-                    />
-                )}
-            </ul>
+            <table className="table is-hoverable is-fullwidth">
+                <thead>
+                    <tr className="has-background-link">
+                        <th></th>
+                        <th className="has-text-light">Date</th>
+                        <th className="has-text-light">Task</th>
+                        <th className="has-text-light">Priority</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {props.todos.map(todo =>
+                        todo.name.includes(search) &&
+                        <ItemRow
+                            handleComplete={props.handleComplete}
+                            handleRemove={props.handleRemove}
+                            key={todo.id}
+                            todo={todo}
+                        />
+                    )}
+                </tbody>
+            </table>
         </div>
     );
 }
