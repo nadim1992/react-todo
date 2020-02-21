@@ -10,7 +10,7 @@ function ListContainer(props) {
     };
 
     return (
-        <div className="column is-three-fifths">
+        <div className="column">
             <h2 className="is-size-3 has-text-centered">Tasks</h2>
 
             <ListFilter
@@ -22,9 +22,9 @@ function ListContainer(props) {
                 <thead>
                     <tr className="has-background-link">
                         <th></th>
-                        <th className="has-text-light">Date</th>
-                        <th className="has-text-light">Task</th>
-                        <th className="has-text-light">Priority</th>
+                        <th className="has-text-light" data-sort-by="date" onClick={props.handleSort}>Date</th>
+                        <th className="has-text-light" data-sort-by="name" onClick={props.handleSort}>Task</th>
+                        <th className="has-text-light" data-sort-by="priority" onClick={props.handleSort}>Priority</th>
                         <th></th>
                     </tr>
                 </thead>

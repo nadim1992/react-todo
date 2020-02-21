@@ -4,9 +4,9 @@ import SelectFormField from './SelectFormField';
 
 function FormContainer(props) {
     const priorities = [
-        { id: 'high', name: 'High' },
-        { id: 'medium', name: 'Medium' },
-        { id: 'low', name: 'Low' }
+        { id: '1', name: 'High' },
+        { id: '2', name: 'Medium' },
+        { id: '3', name: 'Low' }
     ];
 
     return (

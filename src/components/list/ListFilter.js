@@ -7,7 +7,7 @@ function ListFilter(props) {
             handleChange={props.handleSearch}
             inputType="search"
             name="search"
-            label="Search Todo"
+            label="Search Task"
         />
     );
 }
