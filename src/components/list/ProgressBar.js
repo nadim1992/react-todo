@@ -2,7 +2,7 @@ import React from 'react';
 
 function ProgressBar(props) {
     const todosCompletedCount = () => {
-        return props.todos.filter(todo => todo.complete === true).length;
+        return props.todos.filter(todo => todo.complete).length;
     };
 
     const percentage = () => {

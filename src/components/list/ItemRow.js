@@ -18,6 +18,14 @@ function ItemRow(props) {
             <td><PriorityTag priority={props.todo.priority} /></td>
             <td>
                 <span
+                    onClick={props.handleEdit}
+                    data-todo={props.todo}
+                    role="img"
+                    className="has-text-info"
+                    aria-label="Edit"
+                >&#9998;</span>
+
+                <span
                     onClick={props.handleRemove}
                     data-id={props.todo.id}
                     role="img"

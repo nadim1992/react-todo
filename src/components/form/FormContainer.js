@@ -19,7 +19,7 @@ function FormContainer(props) {
                     inputType="date"
                     name="date"
                     label="Date"
-                    value={props.date}
+                    value={props.todo.date}
                 />
 
                 <TextFormField
@@ -27,7 +27,7 @@ function FormContainer(props) {
                     inputType="text"
                     name="name"
                     label="Task name"
-                    value={props.name}
+                    value={props.todo.name}
                     required={true}
                 />
 
@@ -36,7 +36,7 @@ function FormContainer(props) {
                     name="priority"
                     label="Select task priority"
                     options={priorities}
-                    value={props.priority}
+                    value={props.todo.priority}
                 />
 
                 <input

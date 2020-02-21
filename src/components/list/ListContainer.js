@@ -36,6 +36,7 @@ function ListContainer(props) {
                         todo.name.toLowerCase().includes(search) &&
                         <ItemRow
                             handleComplete={props.handleComplete}
+                            handleEdit={props.handleEdit}
                             handleRemove={props.handleRemove}
                             key={todo.id}
                             todo={todo}

@@ -4,6 +4,7 @@ import FormContainer from './form/FormContainer';
 import ListContainer from './list/ListContainer';
 
 import {
+    getDummyData,
     getTodaysDate,
     sortByDateAsc,
     sortByDateDesc,
@@ -17,43 +18,43 @@ import 'bulma/css/bulma.css';
 import './App.css';
 
 function App() {
-    const [todos, setTodos] = useState([]);
-    const [date, setDate] = useState(getTodaysDate());
-    const [name, setName] = useState('');
-    const [priority, setPriority] = useState('3');
-    const [sort, setSort] = useState('asc');
-
-    const handleChange = (e) => {
-        switch (e.target.name) {
-            case 'date':
-                setDate(e.target.value);
-                break;
-
-            case 'name':
-                setName(e.target.value);
-                break;
-
-            case 'priority':
-                setPriority(e.target.value);
-                break;
-
-            default:
-        }
+    // a task properties
+    const defaultsData = {
+        id      : 0,
+        complete: false,
+        date    : getTodaysDate(),
+        name    : '',
+        priority: '3'
     };
 
+    // states
+    const [todo, setTodo]   = useState(defaultsData);
+    const [todos, setTodos] = useState([]);
+    const [sort, setSort]   = useState('asc');
+
+    // trigger on input change
+    const handleChange = (e) => {
+        let tempObj = {...todo};
+        tempObj[e.target.name] = e.target.value;
+        
+        setTodo(tempObj);
+    };
+
+    // trigger on form submit
     const handleSubmit = (e) => {
         let count = todos.length;
+        let tempObj = {...todo};
+        
+        tempObj['id'] = ++count;
 
-        setTodos([
-            { id: ++count, complete: false, date, name, priority },
-            ...todos
-        ]);
+        setTodos([tempObj, ...todos]);
 
-        resetForm();
+        setTodo(defaultsData); // reset to defaults
 
         e.preventDefault();
     };
 
+    // mark a task as complete
     const handleComplete = (e) => {
         const id = parseInt(e.target.dataset.id);
 
@@ -68,12 +69,18 @@ function App() {
         );
     };
 
+    // edit a task
+    const handleEdit = (e) => {
+        setTodo(e.target.dataset.todo);
+    };
+
     const handleRemove = (e) => {
         const id = parseInt(e.target.dataset.id);
 
         setTodos(todos.filter(todo => todo.id !== id));
     };
 
+    // sort on list item header label click
     const handleSort = (e) => {
         let sortedTodos;
 
@@ -114,24 +121,9 @@ function App() {
         setTodos(sortedTodos);
     };
 
-    const resetForm = () => {
-        setDate(getTodaysDate());
-        setName('');
-        setPriority('3');
-    };
-
-    // Initialize test data
+    // initialize test data
     useEffect(() => {
-        setTodos([
-            { id: 1, complete: false, date: '2018-11-02', name: 'Go to store', priority: '3' },
-            { id: 2, complete: false, date: '2018-09-04', name: 'Buy some food', priority: '1' },
-            { id: 3, complete: false, date: '2018-11-05', name: 'Go to school', priority: '2' },
-            { id: 4, complete: true, date: '2019-01-07', name: 'Call Mr. John', priority: '3' },
-            { id: 5, complete: false, date: '2018-11-12', name: 'Do something fun', priority: '3' },
-            { id: 6, complete: true, date: '2018-07-23', name: 'Come back home', priority: '1' },
-            { id: 7, complete: true, date: '2019-11-23', name: 'Watch movie', priority: '2' },
-            { id: 8, complete: false, date: '2018-09-27', name: 'Go to bed', priority: '3' }
-        ]);
+        setTodos(getDummyData());
     }, []);
 
     return (
@@ -140,13 +132,12 @@ function App() {
                 <FormContainer
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
-                    date={date}
-                    name={name}
-                    priority={priority}
+                    todo={todo}
                 />
 
                 <ListContainer
                     handleComplete={handleComplete}
+                    handleEdit={handleEdit}
                     handleRemove={handleRemove}
                     handleSort={handleSort}
                     todos={todos}
