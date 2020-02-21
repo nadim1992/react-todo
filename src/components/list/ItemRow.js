@@ -19,7 +19,7 @@ function ItemRow(props) {
             <td>
                 <span
                     onClick={props.handleEdit}
-                    data-todo={props.todo}
+                    data-todo={JSON.stringify(props.todo)}
                     role="img"
                     className="has-text-info"
                     aria-label="Edit"

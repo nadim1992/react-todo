@@ -42,8 +42,14 @@ function FormContainer(props) {
                 <input
                     className="button is-link"
                     type="submit"
-                    value="Submit"
+                    value={props.mode === 'create' ? 'Save' : 'Save Changes'}
                 />
+
+                <button
+                    onClick={props.handleReset}
+                    type="button"
+                    className="button is-danger is-light is-small is-pulled-right"
+                >Reset Form</button>
             </form>
         </div>
     );

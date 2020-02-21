@@ -28,30 +28,49 @@ function App() {
     };
 
     // states
+    const [mode, setMode]   = useState('create');
     const [todo, setTodo]   = useState(defaultsData);
     const [todos, setTodos] = useState([]);
     const [sort, setSort]   = useState('asc');
 
+    // create
+    const createTodo = () => {
+        let count = todos.length;
+        let tempObj = { ...todo };
+
+        tempObj['id'] = ++count;
+
+        setTodos([tempObj, ...todos]);
+    };
+
+    // update
+    const updateTodo = () => {
+        let tempObj = { ...todo };
+
+        setTodos(
+            todos.map(todo => {
+                if (todo.id === tempObj.id) {
+                    todo = tempObj;
+                }
+
+                return todo;
+            })
+        );
+    };
+
     // trigger on input change
     const handleChange = (e) => {
-        let tempObj = {...todo};
+        let tempObj = { ...todo };
         tempObj[e.target.name] = e.target.value;
-        
+
         setTodo(tempObj);
     };
 
     // trigger on form submit
     const handleSubmit = (e) => {
-        let count = todos.length;
-        let tempObj = {...todo};
-        
-        tempObj['id'] = ++count;
+        mode === 'create' ? createTodo() : updateTodo();
 
-        setTodos([tempObj, ...todos]);
-
-        setTodo(defaultsData); // reset to defaults
-
-        e.preventDefault();
+        handleReset(e);
     };
 
     // mark a task as complete
@@ -71,7 +90,11 @@ function App() {
 
     // edit a task
     const handleEdit = (e) => {
-        setTodo(e.target.dataset.todo);
+        setTodo(
+            JSON.parse(e.target.dataset.todo)
+        );
+
+        setMode('update');
     };
 
     const handleRemove = (e) => {
@@ -121,6 +144,13 @@ function App() {
         setTodos(sortedTodos);
     };
 
+    const handleReset = (e) => {
+        setTodo(defaultsData);
+        setMode('create');
+
+        e.preventDefault();
+    };
+
     // initialize test data
     useEffect(() => {
         setTodos(getDummyData());
@@ -132,7 +162,9 @@ function App() {
                 <FormContainer
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
+                    handleReset={handleReset}
                     todo={todo}
+                    mode={mode}
                 />
 
                 <ListContainer
