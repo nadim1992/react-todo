@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ListFilter from './ListFilter';
+import ProgressBar from './ProgressBar';
 import ItemRow from './ItemRow';
 
 function ListContainer(props) {
@@ -17,6 +18,8 @@ function ListContainer(props) {
                 handleSearch={handleSearch}
                 search={search}
             />
+
+            <ProgressBar todos={props.todos} />
 
             <table className="table is-hoverable is-fullwidth">
                 <thead>
