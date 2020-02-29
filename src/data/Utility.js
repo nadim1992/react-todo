@@ -1,3 +1,13 @@
+export function getDefaultsData() {
+    return {
+        id      : 0,
+        complete: false,
+        date    : getTodaysDate(),
+        name    : '',
+        priority: '3'
+    };
+}
+
 export function getDummyData() {
     return [
         { id: 1, complete: false, date: '2018-11-02', name: 'Go to store', priority: '3' },

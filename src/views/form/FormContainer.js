@@ -1,6 +1,7 @@
 import React from 'react';
 import TextFormField from './TextFormField';
 import SelectFormField from './SelectFormField';
+import { getDefaultsData } from '../../data/Utility';
 
 function FormContainer(props) {
     const priorities = [
@@ -9,13 +10,37 @@ function FormContainer(props) {
         { id: '3', name: 'Low' }
     ];
 
+    // trigger on input change
+    const handleChange = (e) => {
+        let tempObj = { ...props.todo };
+        tempObj[e.target.name] = e.target.value;
+
+        props.onUpdateDraft(tempObj);
+    };
+
+    const handleReset = (e) => {
+        props.onUpdateDraft(getDefaultsData());
+        props.onChangeMode('create');
+
+        e.preventDefault();
+    };
+
+    // trigger on form submit
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        props.mode === 'create' ? props.onCreateTodo(props.todo) : props.onCreateTodo(props.todo);
+
+        handleReset(e);
+    };
+
     return (
         <div className="column">
             <h2 className="is-size-3 has-text-centered">Add Task</h2>
 
-            <form onSubmit={props.handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <TextFormField
-                    handleChange={props.handleChange}
+                    handleChange={handleChange}
                     inputType="date"
                     name="date"
                     label="Date"
@@ -23,7 +48,7 @@ function FormContainer(props) {
                 />
 
                 <TextFormField
-                    handleChange={props.handleChange}
+                    handleChange={handleChange}
                     inputType="text"
                     name="name"
                     label="Task name"
@@ -32,7 +57,7 @@ function FormContainer(props) {
                 />
 
                 <SelectFormField
-                    handleChange={props.handleChange}
+                    handleChange={handleChange}
                     name="priority"
                     label="Select task priority"
                     options={priorities}
@@ -46,7 +71,7 @@ function FormContainer(props) {
                 />
 
                 <button
-                    onClick={props.handleReset}
+                    onClick={handleReset}
                     type="button"
                     className="button is-danger is-light is-small is-pulled-right"
                 >Reset Form</button>
