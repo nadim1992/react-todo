@@ -3,31 +3,52 @@ import PriorityTag from './PriorityTag';
 import DateTag from './DateTag';
 
 function ItemRow(props) {
+    // handle complete / incomplete todo
+    const handleComplete = (e) => {
+        const id = parseInt(e.target.dataset.id);
+
+        props.onToggleCompleteTodo(id);
+    };
+
+    // edit a todo
+    const handleEdit = (e) => {
+        props.onUpdateDraft(JSON.parse(e.target.dataset.todo));
+
+        props.onChangeMode('update');
+    };
+
+    // delete a todo
+    const handleRemove = (e) => {
+        const id = parseInt(e.target.dataset.id);
+
+        props.onRemoveTodo(id);
+    };
+
     return (
         <tr>
             <td>
                 <input
-                    onChange={props.handleComplete}
-                    data-id={props.todo.id}
-                    checked={props.todo.complete}
+                    onChange={handleComplete}
+                    data-id={props.item.id}
+                    checked={props.item.complete}
                     type="checkbox"
                 />
             </td>
-            <td><DateTag date={props.todo.date} /></td>
-            <td>{props.todo.name}</td>
-            <td><PriorityTag priority={props.todo.priority} /></td>
+            <td><DateTag date={props.item.date} /></td>
+            <td>{props.item.name}</td>
+            <td><PriorityTag priority={props.item.priority} /></td>
             <td>
                 <span
-                    onClick={props.handleEdit}
-                    data-todo={JSON.stringify(props.todo)}
+                    onClick={handleEdit}
+                    data-todo={JSON.stringify(props.item)}
                     role="img"
                     className="has-text-info"
                     aria-label="Edit"
                 >&#9998;</span>
 
                 <span
-                    onClick={props.handleRemove}
-                    data-id={props.todo.id}
+                    onClick={handleRemove}
+                    data-id={props.item.id}
                     role="img"
                     className="is-pulled-right"
                     aria-label="Remove"

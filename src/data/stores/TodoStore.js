@@ -16,6 +16,12 @@ class TodoStore extends ReduceStore {
 
     reduce(state, action) {
         switch (action.type) {
+            case TodoActionTypes.DUMMY_DATA:
+                return state.set(
+                    action.todo.id,
+                    new Todo(action.todo)
+                );
+
             case TodoActionTypes.CREATE_TODO:
                 if (! action.todo.name) {
                     return state;
@@ -30,6 +36,24 @@ class TodoStore extends ReduceStore {
                     date    : action.todo.date,
                     priority: action.todo.priority
                 }));
+
+            case TodoActionTypes.TOGGLE_COMPLETE_TODO:
+                return state.update(
+                    action.id,
+                    todo => todo.set('complete', !todo.complete)
+                );
+
+            case TodoActionTypes.EDIT_TODO:
+                // Eh! don't like this process :(
+                return state.setIn([action.todo.id, 'date'], action.todo.date)
+                            .setIn([action.todo.id, 'name'], action.todo.name)
+                            .setIn([action.todo.id, 'priority'], action.todo.priority);
+
+            case TodoActionTypes.REMOVE_TODO:
+                return state.delete(action.id);
+        
+            case TodoActionTypes.SORT_TODOS:
+                return state.clear();
 
             default:
                 return state;

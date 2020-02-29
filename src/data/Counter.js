@@ -1,4 +1,6 @@
-let _counter = 1;
+import { getCounterInitialValue } from './Utility';
+
+let _counter = getCounterInitialValue();
 
 const Counter = {
     increment() {

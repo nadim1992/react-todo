@@ -21,6 +21,10 @@ export function getDummyData() {
     ];
 }
 
+export function getCounterInitialValue() {
+    return getDummyData().length + 1;
+}
+
 export function getTodaysDate() {
     const today = new Date();
     const day   = String(today.getDate()).padStart(2, '0');

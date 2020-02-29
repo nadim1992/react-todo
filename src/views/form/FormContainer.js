@@ -18,6 +18,7 @@ function FormContainer(props) {
         props.onUpdateDraft(tempObj);
     };
 
+    // reset the form after submission
     const handleReset = (e) => {
         props.onUpdateDraft(getDefaultsData());
         props.onChangeMode('create');
@@ -29,7 +30,7 @@ function FormContainer(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        props.mode === 'create' ? props.onCreateTodo(props.todo) : props.onCreateTodo(props.todo);
+        props.mode === 'create' ? props.onCreateTodo(props.todo) : props.onEditTodo(props.todo);
 
         handleReset(e);
     };

@@ -19,9 +19,14 @@ function getState() {
         todo: TodoDraftStore.getState(),
         todos: TodoStore.getState(),
 
+        onDummyData: TodoActions.dummyData,
         onChangeMode: TodoActions.changeMode,
         onCreateTodo: TodoActions.createTodo,
+        onToggleCompleteTodo: TodoActions.toggleCompleteTodo,
+        onEditTodo: TodoActions.editTodo,
+        onRemoveTodo: TodoActions.removeTodo,
         onUpdateDraft: TodoActions.updateDraft,
+        onSortTodos: TodoActions.sortTodos
     };
 }
 

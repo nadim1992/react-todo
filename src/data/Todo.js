@@ -1,11 +1,6 @@
 import Immutable from 'immutable';
+import { getDefaultsData } from './Utility';
 
-const Todo = Immutable.Record({
-    id: 0,
-    complete: false,
-    date: '',
-    name: '',
-    priority: ''
-});
+const Todo = Immutable.Record(getDefaultsData());
 
 export default Todo;
