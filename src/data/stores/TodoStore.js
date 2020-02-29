@@ -53,7 +53,7 @@ class TodoStore extends ReduceStore {
                 return state.delete(action.id);
         
             case TodoActionTypes.SORT_TODOS:
-                return state.clear();
+                return Immutable.OrderedMap(action.todos);
 
             default:
                 return state;
