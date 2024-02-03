@@ -67,6 +67,7 @@ function ListContainer(props) {
         getDummyData().forEach(data => {
             props.onDummyData(data);
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
